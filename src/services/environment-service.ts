@@ -1,6 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import { MaterialsService } from "./materials-service";
-
+import linkCheck from './files-checker-helper.js';
 
 export class EnvironmentService {
 	private readonly scene: any;
@@ -24,12 +23,7 @@ export class EnvironmentService {
 				this.hdrTexture = hdrTexture;
 				resolve(hdrTexture);
 			}
-			function linkCheck( url ) {
-				let http = new XMLHttpRequest();
-				http.open( 'HEAD', url, false );
-				http.send();
-				return http.status != 404;
-			}
+
 
 			reject(new Error("Requested file return status 404"));
 		})

@@ -8,7 +8,7 @@ import { LoaderService } from './services/loader-service';
 import {ShadowService} from "./services/shadow-service";
 import { MaterialsService } from "./services/materials-service";
 import { EnvironmentService } from "./services/environment-service";
-import { global_scene } from './services/store';
+import { global_scene, preloading } from './services/store';
 
 export const createScene = async ( canvas ) => {
 
@@ -25,18 +25,27 @@ export const createScene = async ( canvas ) => {
 	scene.clearColor = new BABYLON.Color4( 1.0, 1.0, 1.0, 1.0 ).toLinearSpace();
 	cameraService.createPerspectiveCam();
 	shadowService.createShadowGenerator(lights);
-	envService.createHDREnvironment().then(()=>{
-		materialService.createBackgroundMaterial();
-		materialService.createGrassMaterial();
-		materialService.createGridMaterial();
-		materialService.createShadowOnlyMaterial();
-		envService.createSkyBox();
-		envService.createGround();
-		envService.createGrid();
-		loaderService.loadModel( scene );
+
+	preloading.update(() => {
+		return true;
+	});
+	loaderService.loadModel( scene ).then(()=>{
+		envService.createHDREnvironment().then(()=>{
+			materialService.createBackgroundMaterial();
+			materialService.createGrassMaterial();
+			materialService.createGridMaterial();
+			materialService.createShadowOnlyMaterial();
+			materialService.setupExistsMaterials();
+			envService.createSkyBox();
+			envService.createGround();
+			envService.createGrid();
+		})
 	})
 
 
+	preloading.update(() => {
+		return false;
+	});
 	global_scene.update( () => {
 		return scene;
 	} );
