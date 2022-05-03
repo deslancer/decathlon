@@ -10,19 +10,20 @@ export class LightService {
       return new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0), this.scene);
     }
 
-    createDirectionalLight() {
-      const dir_light = new BABYLON.DirectionalLight('light', new BABYLON.Vector3(1, -1, -1.5), this.scene)
-        dir_light.position.y = 4;
-        dir_light.intensity = 1;
-        return dir_light;
-    }
-
-    createHDRILight(){
-        const hdrTexture = new BABYLON.CubeTexture.CreateFromPrefilteredData("./assets/textures/environment.env", this.scene);
-        this.scene.environmentTexture = hdrTexture;
-        hdrTexture.level = 1.0;
-        const hdrRotation = 277.5; // in degrees
-        hdrTexture.setReflectionTextureMatrix(BABYLON.Matrix.RotationY(BABYLON.Tools.ToRadians(hdrRotation)));
-        return hdrTexture;
+    createDirectionalLights() {
+        const lights = [];
+        const light = new BABYLON.DirectionalLight('light', new BABYLON.Vector3(0.8, -0.55, 0.25), this.scene)
+        light.position.x = -3.530;
+        light.position.y = 5.098;
+        light.position.z = -0.815;
+        light.intensity = 1
+        lights.push(light);
+        const light2 = new BABYLON.DirectionalLight('light', new BABYLON.Vector3(0.8, -0.55, 0.25), this.scene)
+        light2.position.x = 5.530;
+        light2.position.y = 5.098;
+        light2.position.z = 1.815;
+        light2.intensity = 1;
+        lights.push(light2)
+        return lights
     }
 }

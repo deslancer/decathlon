@@ -24,6 +24,7 @@
     "typescript": "^3.9.10"
   },
   "dependencies": {
+    "@babylonjs/materials": "^4.2.0",
     "babylonjs": "^4.2.0",
     "babylonjs-gui": "^4.2.0",
     "babylonjs-loaders": "^4.2.0",

@@ -19,6 +19,6 @@
             </div>
     </div>
 {/if}
-<a rel="ar" class="ar_btn" id="ar-link-3" href="https://developer.apple.com/augmented-reality/quick-look/models/solar-panels/solar_panels_stylized.usdz#custom=https://developer.apple.com/augmented-reality/quick-look/models/solar-panels/solar_panels_custom.html?1&customHeight=large&allowsContentScaling=0">
+<!--<a rel="ar" class="ar_btn" id="ar-link-3" href="https://developer.apple.com/augmented-reality/quick-look/models/solar-panels/solar_panels_stylized.usdz#custom=https://developer.apple.com/augmented-reality/quick-look/models/solar-panels/solar_panels_custom.html?1&customHeight=large&allowsContentScaling=0">
     <img src="./assets/view.png" width="48px" alt="ar">
-</a>
+</a>-->

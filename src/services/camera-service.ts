@@ -11,18 +11,24 @@ export class CameraService{
 
     createPerspectiveCam(){
         let isDeviceMobile = new DeviceIdentifierHelper().isMobile();
-        const camera = new BABYLON.ArcRotateCamera(
-            "Camera",
-            2.65,
-            1.4,
-            isDeviceMobile ? 180 : 80,
+
+        const camera = new BABYLON.ArcRotateCamera("camera",
+            -Math.PI / 1.8,
+            Math.PI / 2.5,
+            6,
             new BABYLON.Vector3(0, 0, 0),
             this.scene);
-
-        camera.lowerRadiusLimit = 40;
-        camera.upperRadiusLimit = isDeviceMobile ? 280 : 100;
-        camera.upperBetaLimit = Math.PI / 2.1;
         camera.attachControl(this.canvas, true);
+        camera.minZ = 0.1;
+        camera.target = new BABYLON.Vector3(0, 0.8, 0);
+        camera.upperBetaLimit = Math.PI / 2.2;
+        camera.lowerRadiusLimit = 5;
+        camera.upperRadiusLimit = 5;
+
+        if (isDeviceMobile) {
+            camera.radius = 10;
+            camera.upperRadiusLimit = 12;
+        }
 
         return camera
     }
