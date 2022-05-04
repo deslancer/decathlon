@@ -16,15 +16,14 @@ export const createScene = async ( canvas ) => {
 	const scene = new BABYLON.Scene( engine );
 	const cameraService = new CameraService( canvas, scene );
 	const lightService = new LightService( scene );
-	const loaderService = new LoaderService();
+
 	const materialService = new MaterialsService(scene);
 	const envService = new EnvironmentService(scene, materialService);
-	const shadowService = new ShadowService();
 	const lights: Array<any> = lightService.createDirectionalLights();
-
+	const loaderService = new LoaderService(new ShadowService(lights));
 	scene.clearColor = new BABYLON.Color4( 1.0, 1.0, 1.0, 1.0 ).toLinearSpace();
 	cameraService.createPerspectiveCam();
-	shadowService.createShadowGenerator(lights);
+
 
 	preloading.update(() => {
 		return true;
@@ -38,7 +37,7 @@ export const createScene = async ( canvas ) => {
 			materialService.setupExistsMaterials();
 			envService.createSkyBox();
 			envService.createGround();
-			envService.createGrid();
+			//envService.createGrid();
 		})
 	})
 
