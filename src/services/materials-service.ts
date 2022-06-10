@@ -1,7 +1,8 @@
 import * as BABYLON from 'babylonjs';
 import * as Materials from 'babylonjs-materials';
+import { IMaterialService } from '../interfaces/IMaterialService';
 
-export class MaterialsService {
+export class MaterialsService implements IMaterialService{
 	private readonly scene: any;
 	private gridMat: any;
 	private grassMat: any;
@@ -50,11 +51,11 @@ export class MaterialsService {
 		this.shadowOnlyMat = new Materials.ShadowOnlyMaterial( 'shadowOnly', this.scene );
 	}
 
-	setupExistsMaterials(){
-		let dimension_height_mat = this.scene.getMaterialByName('dimensions_h');
-		let dimension_wd_mat = this.scene.getMaterialByName('dimensions_wd');
-		let shelter_room = this.scene.getMaterialByName('Room');
-		shelter_room.albedoTexture = new BABYLON.Texture('assets/textures/Room_BaseColor_light_10.jpg', this.scene);
+	setupExistsMaterials() {
+		let dimension_height_mat = this.scene.getMaterialByName( 'dimensions_h' );
+		let dimension_wd_mat = this.scene.getMaterialByName( 'dimensions_wd' );
+		let shelter_room = this.scene.getMaterialByName( 'Room' );
+		shelter_room.albedoTexture = new BABYLON.Texture( 'assets/textures/Room_BaseColor_light_10.jpg', this.scene );
 
 		dimension_wd_mat.hasAlpha = true;
 		dimension_wd_mat.metallic = 1.0;

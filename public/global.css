@@ -1,0 +1,139 @@
+html, body {
+	overflow: hidden;
+		width: 100vw;
+		height: 100vh;
+		margin: 0;
+		padding: 0;
+		background: #000000;
+		font-size: 12px;
+		color: rgb(0, 130, 195);
+	font-family: 'Roboto', sans-serif;
+}
+
+canvas {
+	width: 100vw;
+	height: 100vh;
+	display: block;
+}
+
+
+.left-bottom-nav {
+	position: absolute;
+	bottom: 48px;
+	left: 48px;
+}
+.right-bottom-nav {
+	position: absolute;
+	bottom: 48px;
+	right: 48px;
+}
+.icons_container {
+	display: flex;
+	flex-direction: column;
+}
+.icons_container > p {
+	cursor: pointer;
+	padding: 18px;
+	border-radius: 50%;
+	transition: all 250ms ease-in-out;
+}
+.my-4 {
+	margin-top: 1.5rem!important;
+	margin-bottom: 1.5rem!important;
+}
+.img_icon {
+	max-width: 40px;
+}
+
+
+.ar_btn {
+	visibility: hidden;
+}
+
+.img_icon {
+	max-width: 40px;
+}
+
+.toggle_env {
+	display: flex;
+	padding: 18px;
+	border-radius: 50%;
+	transition: all 250ms ease-in-out;
+	position: relative;
+	left: 48px;
+}
+
+.env_btn {
+	margin: auto;
+	cursor: pointer;
+}
+
+.top_bar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	position: absolute;
+	top: 16px;
+}
+.product-name {
+    background-color: rgb(0, 130, 195);
+    color: white;
+    display: flex;
+    width: auto;
+}
+.product-name p {
+    padding: 0.8rem 1.2rem;
+    margin: auto;
+    font-size: 1.2rem;
+}
+@media (hover: hover) and (pointer: fine) {
+	a:hover {
+		color: rgb(255, 234, 40);
+	}
+	.icons_container > p:hover, .toggle_env:hover {
+		background-color: rgb(255, 234, 40);
+	}
+}
+@media (min-device-width:320px) and (max-device-width: 641px) {
+	.product-name p {
+			padding: 0.5rem 1rem;
+			margin: auto;
+			font-size: 1rem;
+		}
+	.icons_container>p {
+		padding: 0;
+	}
+	.img_icon {
+		max-width: 32px;
+	}
+	.toggle_env {
+		left: 16px;
+	}
+	.ar_btn {
+			display: flex;
+			padding: 18px;
+			border-radius: 50%;
+			position: relative;
+			right: 16px;
+			width: 32px;
+			height: 32px;
+			text-align: center;
+			background-color: rgb(255, 234, 40);
+			text-decoration: none;
+			visibility: visible;
+	}
+	.ar-text {
+		margin: auto;
+		line-height: 0.9;
+	}
+	.accent {
+		font-size: 1.5rem;
+	}
+	.left-bottom-nav {
+		left: 32px;
+	}
+	.right-bottom-nav {
+		right: 32px;
+	}
+}
