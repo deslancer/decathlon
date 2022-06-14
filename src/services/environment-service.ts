@@ -1,13 +1,13 @@
 import * as BABYLON from 'babylonjs';
-import { ILoaderService } from "../interfaces/ILoaderService"
-import { skyboxState } from './store';
+import type { ILoaderService } from "../interfaces/ILoaderService"
+import type { MaterialsService } from './materials-service';
+import { skyboxState, grassState, gridState } from './store';
 
 export class EnvironmentService {
 	private readonly scene: any;
-	private hdrTexture;
 	private readonly materialService: any;
 	private loaderService: ILoaderService;
-	constructor( scene, materials, loaderService: ILoaderService ) {
+	constructor(scene: BABYLON.Scene, materials: MaterialsService, loaderService: ILoaderService) {
 		this.scene = scene;
 		this.materialService = materials;
 		this.loaderService = loaderService;
@@ -16,27 +16,27 @@ export class EnvironmentService {
 	createHDREnvironment(): void {
 		this.loaderService.getEnvTextureTask().onSuccess = (task) => {
 			task.texture.setReflectionTextureMatrix(
-					BABYLON.Matrix.RotationY( 1.20 )
-				);
+				BABYLON.Matrix.RotationY(1.20)
+			);
 			this.scene.environmentTexture = task.texture;
 		}
 	}
 
 	createSkyBox() {
-		let skybox = BABYLON.Mesh.CreateBox( "BackgroundSkybox", 300, this.scene, undefined, BABYLON.Mesh.BACKSIDE );
-		skybox.setEnabled(false);
+		let skybox = BABYLON.Mesh.CreateBox("BackgroundSkybox", 300, this.scene, undefined, BABYLON.Mesh.BACKSIDE);
+
 		skyboxState.subscribe((value) => {
-			console.log(value);
+			skybox.setEnabled(value);
 		});
 		skybox.material = this.materialService.backgroundMaterial;
-		this.scene.registerAfterRender( () => {
-			skybox.rotate( BABYLON.Axis.Y, +0.00015, BABYLON.Space.LOCAL );
-		} )
+		this.scene.registerAfterRender(() => {
+			skybox.rotate(BABYLON.Axis.Y, +0.00015, BABYLON.Space.LOCAL);
+		})
 		return skybox
 	}
 
 	createGround() {
-		const ground = BABYLON.Mesh.CreatePlane( 'ground', 1000, this.scene )
+		const ground = BABYLON.Mesh.CreatePlane('ground', 1000, this.scene)
 		ground.rotation.x = Math.PI / 2;
 		ground.material = this.materialService.shadowOnlyMaterial;
 		ground.receiveShadows = true;
@@ -46,12 +46,15 @@ export class EnvironmentService {
 	}
 
 	createGrid() {
-		let grid = BABYLON.MeshBuilder.CreateDisc( "plane", {
+		let grid = BABYLON.MeshBuilder.CreateDisc("plane", {
 			radius: 15
-		}, this.scene );
+		}, this.scene);
 		grid.rotation.x = Math.PI / 2;
 		grid.position.y = -0.06;
 		grid.position.x = 0.5;
 		grid.material = this.materialService.gridMaterial;
+		gridState.subscribe((value) => {
+			grid.setEnabled(value);
+		});
 	}
 }

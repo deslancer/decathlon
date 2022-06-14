@@ -1,12 +1,18 @@
 <script>
-  function clickEVT() {
-    alert("click");
+  import { skyboxState, gridState, grassState } from "./services/store";
+  function toggleEnv() {
+    skyboxState.update((value) => {
+      return !value;
+    });
+    gridState.update((value) => {
+      return !value;
+    });
   }
 </script>
 
 <div class="top_bar">
   <div class="toggle_env">
-    <p class="env_btn" on:click|preventDefault={clickEVT}>
+    <p class="env_btn" on:click|preventDefault={toggleEnv}>
       <img
         id="envIcon"
         class="img_icon"
